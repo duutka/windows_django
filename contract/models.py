@@ -1,9 +1,8 @@
 from django.db import models
 from django.db.models import Sum
-
 from django.forms import ModelForm
-from good.models import Customer
 from good.models import Order
+from customer.models import Customer
 from datetime import datetime, timedelta
 
 # Create your models here.
@@ -44,6 +43,34 @@ class Provider(models.Model):
 
     def __str__(self):
         return '%s %s %s %s' % (self.last_name,self.first_name,self.patronymic,self.organization)
+
+
+class Transaction(models.Model):
+    date_transaction = models.DateField(blank=True,
+                                        null=True,
+                                        verbose_name="Дата поступления платежа"
+                                        )
+    contract = models.ForeignKey('Contract',
+                                on_delete=models.CASCADE,
+                                blank=True,
+                                null=True,
+                                verbose_name="Контракт"
+                                )
+    sum = models.DecimalField(max_digits = 10,
+                              decimal_places = 2,
+                              default = 0,
+                              verbose_name="Сумма оплаты"
+                            )
+    comment = models.CharField(max_length=128,
+                               verbose_name="Комментарий к оплате"
+                               )
+    class Meta:
+        verbose_name = "Оплата"
+        verbose_name_plural = "Оплаты"
+
+    def __str__(self):
+        return '%s %s %s' % (self.date_transaction, self.sum, self.comment)
+
 
 class Contract(models.Model):
     '''
@@ -95,6 +122,11 @@ class Contract(models.Model):
                             choices=CHOICES,
                             verbose_name="Тип договора"
                             )
+    total_price = models.DecimalField(max_digits = 10,
+                                     decimal_places = 2,
+                                     default = 0,
+                                     verbose_name="Полная стоимость"
+                                     )
     date_provider = models.DateField(blank=True,
                                      null=True,
                                      verbose_name="Дата подписания договора поставщиков"
@@ -106,10 +138,8 @@ class Contract(models.Model):
                                    auto_now=True,
                                    verbose_name="Обновлено"
                                    )
-    def get_total_price(self):
-        return self.order.good_set.all().aggregate(Sum('total_price'))['total_price__sum']
-
-
+    # def get_total_price(self):
+    #     return self.order.good_set.all().aggregate(Sum('total_price'))['total_price__sum']
 
     class Meta:
         verbose_name = "Договор"
@@ -124,3 +154,16 @@ class Contract(models.Model):
         self.customer = self.order.customer
         self.date_provider = self.created.date()
         super().save(*args, **kwargs)
+
+
+    def get_total_transaction(self):
+        if Transaction.objects.filter(contract=self.id).aggregate(Sum('sum'))['sum__sum'] is None:
+            return 0
+        else:
+            return Transaction.objects.filter(contract=self.id).aggregate(Sum('sum'))['sum__sum']
+
+    def get_debt(self):
+        if Transaction.objects.filter(contract=self.id).aggregate(Sum('sum'))['sum__sum'] is None:
+            return self.total_price
+        else:
+            return self.total_price - Transaction.objects.filter(contract=self.id).aggregate(Sum('sum'))['sum__sum']

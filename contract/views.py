@@ -25,11 +25,18 @@ class ContractList(ListView):
     template_name = 'contract/contract_list.html'
     success_url = '/contract/'
     paginate_by = 5
-    queryset = Contract.objects.all()
+
 
     def get_context_data(self, **kwargs):
         context = super(ContractList, self).get_context_data(**kwargs)
         context['form'] = SearchContractForm()
+
+        contract_list = []
+        for contract in Contract.objects.all():
+            contract.__setattr__('total_transaction', contract.get_total_transaction())
+            contract.__setattr__('debt', contract.get_debt())
+            contract_list.append(contract)
+        context['contract_list'] = contract_list
         return context
 
     def get_queryset(self):
@@ -57,7 +64,7 @@ class ContractCreateView(CreateView):
 def docx(request,pk):
     contract = Contract.objects.get(id=pk)
     steam = BytesIO()
-    doc = DocxTemplate("contract/media/word/template_new.docx")
+    doc = DocxTemplate("Contract/media/word//template_new.docx")
     contract.total_price = contract.get_total_price()
     context = {
                 'contract':contract

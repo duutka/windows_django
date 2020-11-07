@@ -17,3 +17,10 @@ class ContractAdmin(admin.ModelAdmin):
     class Meta:
         model = Contract
 admin.site.register(Contract, ContractAdmin)
+
+
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Transaction._meta.fields]
+    class Meta:
+        model = Transaction
+admin.site.register(Transaction, TransactionAdmin)

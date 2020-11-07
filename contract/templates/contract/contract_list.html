@@ -34,22 +34,28 @@
          <table class="table tabel-hover bordered" >
            <tr>
              <th>Номер договора</th>
+             <th>Дата Создания договора</th>
+             <th>Сумма</th>
+             <th>Оплата</th>
+             <th>Долг</th>
              <th>Номер заказа</th>
              <th>ФИО Клиента</th>
              <th>ФИО Заказчика</th>
              <th>Тип договора</th>
-             <th>Дата Создания договора</th>
              <th>Word</th>
            </tr>
-             {% for contract in object_list %}
+             {% for contract in contract_list %}
              {% load static %}
              <tr><td>
              <a href="/contract/{{contract.id}}" class="card-title">№{{contract.contract_number}}</td><td>
+             {{contract.created}}</td><td>
+             {{contract.total_price}}</td><td>
+             {{contract.total_transaction}}</td><td>
+             {{contract.debt}}</td><td>
              {{contract.order.id}}</td><td>
              {{contract.customer}}</td><td>
              {{contract.provider}}</td><td>
              {{contract.type}}</td><td>
-             {{contract.created}}</td><td>
                 <a href="/contract/{{contract.id}}/word">
                   <img src="{% static "images/Microsoft-Word-2013-icon.png" %}" width="50" height="50";>
                 </a>

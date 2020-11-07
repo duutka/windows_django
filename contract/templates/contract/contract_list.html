@@ -1,0 +1,84 @@
+{% extends "template.html" %}
+{% block title %}Договоры{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header>
+    {% include "base/base.html"%}
+    </header>
+      <div class="">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+      {% include "base/base.html"%}
+        </div>
+      </div>
+      <div class="row margin-navbar">
+        <div class="col-10">
+          <form action="" method="GET">{% csrf_token %}
+            {{form}}
+            <button class="button-search" type="submit"></button>
+          </form>
+        </div>
+        <div class="col-2">
+          <form method="get" action="./newcontract">
+            <button type="submit" class="button-create-newcontract">Создать договор</button>
+          </form>
+        </div>
+        <div class="col-2">
+          <form method="get" action="./excel">
+            <button type="submit" class="button-create-newcontract">Выгрузить в Excel</button>
+          </form>
+        </div>
+      </div>
+         <table class="table tabel-hover bordered" >
+           <tr>
+             <th>Номер договора</th>
+             <th>Номер заказа</th>
+             <th>ФИО Клиента</th>
+             <th>ФИО Заказчика</th>
+             <th>Тип договора</th>
+             <th>Дата Создания договора</th>
+             <th>Word</th>
+           </tr>
+             {% for contract in object_list %}
+             {% load static %}
+             <tr><td>
+             <a href="/contract/{{contract.id}}" class="card-title">№{{contract.contract_number}}</td><td>
+             {{contract.order.id}}</td><td>
+             {{contract.customer}}</td><td>
+             {{contract.provider}}</td><td>
+             {{contract.type}}</td><td>
+             {{contract.created}}</td><td>
+                <a href="/contract/{{contract.id}}/word">
+                  <img src="{% static "images/Microsoft-Word-2013-icon.png" %}" width="50" height="50";>
+                </a>
+               </td></tr>
+              {% endfor %}
+            </table>
+            <div class="row">
+              <div class="col-11">
+                {% if is_paginated %}
+                  <ul class="pagination-contract">
+                    {% if page_obj.has_previous %}
+                      <li class="page-item-contract"><a class="page-link-contract" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a></li>
+                    {% else %}
+                      <li class="disabled page-item-contract"><span class="page-link-contract">&laquo;</span></li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                      {% if page_obj.number == i %}
+                        <li class="active page-item-contract"><span class="page-link-contract">{{ i }} <span class="sr-only">(current)</span></span></li>
+                      {% else %}
+                        <li class="page-item-contract"><a class="page-link-contract" href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                      <li class="page-item-contract"><a class="page-link-contract" href="?page={{ page_obj.next_page_number }}">Следующая</a></li>
+                    {% else %}
+                      <li class="disabled page-item-contract"><span class="page-link-contract">&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                {% endif %}
+              </div>
+            </div>
+{% endblock %}

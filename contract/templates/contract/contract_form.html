@@ -1,0 +1,35 @@
+{% extends "template.html" %}
+
+{% load static %}
+
+{% block content %}
+<h3>Создание контракта</h3>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      {% include "base/base.html"%}
+    </div>
+  </div>
+  <div class="row margin-navbar">
+    <div class="col" align="center">
+      <div class="card card-form-contract">
+     <form method="POST" action="">
+       {% csrf_token %}
+              <h4 class="heading-contract-new" align="center">СОЗДАНИЕ КОНТРАКТА</h4>
+              <div class="row">
+                <div class="col-12">
+                    <div class="h-form">Номер контракта {{form.contract_number}}</div>
+                    <div class="h-form">Тип {{form.type}}</div>
+                    <div class="h-form">Аванс {{form.avance}}</div>
+                    <div class="h-form">Срок гарантии {{form.garanty}}</div>
+                    <div class="h-form">Номер заказа {{form.order}}</div>
+                    <div class="h-form">Поставщик {{form.provider}}</div>
+                </div>
+                <input type="submit" name="submit" class="button-create" value="Создать">
+             </div>
+        </form>
+      </div>
+   </div>
+ </div>
+</div>
+{% endblock %}

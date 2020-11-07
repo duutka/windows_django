@@ -1,0 +1,48 @@
+{% extends "good/wrapper.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+  {% include "base/base.html"%}
+    </div>
+  </div>
+  <div class="row margin-navbar">
+  </div>
+  <div class="card-body">
+    <div class="col col-card">
+     <div class="row">
+        {% for good in goods %}
+         <div class="card card-contract bg-primary", style="width: 500px; border-radius: 25px">
+          <div class="card-body card-contract-body">
+           <ul class="list-group list-group-flush">
+            <div class="row">
+            <div class="col-12">
+             <li class="list-group-item"><h5 class="card-subtitle">Профиль: {{good.profile}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Фурнитура: {{good.fittings}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Вид изделия: {{good.type_of_product}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Заполнение: {{good.filling}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Цвет уплотнения: {{good.seal_color}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Микровентиляция: {{good.micro_ventilation}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Цвет декора: {{good.decor_color}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Цвет ручки: {{good.handle_color}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Тонировка: {{good.toning}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Цвет изделия: {{good.product_color}}</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Количество: {{good.number_of}} шт.</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Площадь: {{good.square}} м.кв.</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Цена за 1шт.: {{good.price_per_item}} руб.</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Скидка: {{good.sale}} %</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Цена со скидкой (за 1 шт.): {{good.price_with_sale}} руб.</h5></li>
+             <li class="list-group-item"><h5 class="card-subtitle">Итого за изделие: {{good.total_price}} руб.</h5></li>
+             <h5 class="card-subtitle">&nbsp;</h5>
+            </div>
+           </ul>
+          </div>
+         </div>
+         {% endfor %}
+        </div>
+       </div>
+      </div>
+     </div>
+{% endblock %}

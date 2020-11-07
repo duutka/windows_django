@@ -1,0 +1,73 @@
+{% extends "good/wrapper.html" %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+{% include "base/base.html"%}
+  </div>
+</div>
+<div class="row margin-navbar">
+</div>
+<div class="row">
+ <div class="features">
+   <div class="col-2">
+    <div class="form-body">
+     <form method="POST", action="">
+         {% csrf_token %}
+         {{form_customer.first_name}}
+         {{form_customer.last_name}}
+         {{form_customer.patronymic}}
+         {{form_customer.gender}}
+         {{form_customer.number}}
+         {{form_customer.bank_account}}
+         {{form_customer.city}}
+         {{form_customer.mail_index}}
+         {{form_customer.email}}
+         <button class="btn btn-success" type="submit">Создать клиента</button>
+     </form>
+    </div>
+   </div>
+  </div>
+  <div class="features">
+    <div class="col-2">
+     <div class="form-body">
+      <form method="POST", action="">
+          {% csrf_token %}
+          {{form_good.order}}
+          {{form_good.profile}}
+          {{form_good.fittings}}
+          {{form_good.type_of_product}}
+          {{form_good.filling}}
+          {{form_good.seal_color}}
+          {{form_good.micro_ventilation}}
+          {{form_good.decor_color}}
+          {{form_good.handle_color}}
+          {{form_good.toning}}
+          {{form_good.product_color}}
+          {{form_good.time_of_production}}
+          {{form_good.number_of}}
+          {{form_good.square}}
+          {{form_good.price_per_item}}
+          {{form_good.sale}}
+          {{form_good.status}}
+          <button class="btn btn-success" type="submit">Создать товар</button>
+      </form>
+     </div>
+    </div>
+   </div>
+   <div class="features">
+     <div class="col-8">
+      <div class="form-body">
+       <form method="POST", action="">
+           {% csrf_token %}
+           {{form_order.customer}}
+           {{form_order.payment}}
+           {{form_order.file}}
+           <button class="btn btn-success" type="submit">Создать заказ</button>
+       </form>
+      </div>
+     </div>
+    </div>
+ </div>
+{% endblock %}

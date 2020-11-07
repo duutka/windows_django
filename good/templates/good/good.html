@@ -1,0 +1,99 @@
+{% extends "good/wrapper.html" %}
+{% load static %}
+
+
+{% block title %}Заказы{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col">
+      {% include "base/base.html"%}
+        </div>
+      </div>
+      <div class="row margin-navbar">
+        <div class="col-10">
+          <form action="" method="GET">{% csrf_token %}
+            {{form}}
+            <button class="button-search" type="submit"></button>
+          </form>
+        </div>
+        <div class="col-2">
+          <form method="get" action="./neworder">
+            <button type="submit" class="button-create-newcontract">Создать новый заказ</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-11">
+          {% if is_paginated %}
+            <ul class="pagination-contract">
+              {% if page_obj.has_previous %}
+                <li class="page-item-contract"><a class="page-link-contract" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a></li>
+              {% else %}
+                <li class="disabled page-item-contract"><span class="page-link-contract">&laquo;</span></li>
+              {% endif %}
+              {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                  <li class="active page-item-contract"><span class="page-link-contract">{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                  <li class="page-item-contract"><a class="page-link-contract" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+              {% endfor %}
+              {% if page_obj.has_next %}
+                <li class="page-item-contract"><a class="page-link-contract" href="?page={{ page_obj.next_page_number }}">Следующая</a></li>
+              {% else %}
+                <li class="disabled page-item-contract"><span class="page-link-contract">&raquo;</span></li>
+              {% endif %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <table class="table table-hover">
+                <thead>
+
+                    <th> id </th>
+                    <th></th>
+                    <th> заказ </th>
+                    <th> Профиль</th>
+                    <th> Дата </th>
+                    <th> Цена  </th>
+                    <th> Клиент </th>
+                    <th> </th>
+                    <th> </th>
+                </thead>
+                <tbody>
+          {% for order in object_list %}
+          <tr class="status-{{order.status}}">
+                <td >{{order.id}}</td>
+                <td ><img class="good-image" src="{%if order.image %}{{order.image.url}}{%endif%}"></td>
+                <td ><a href= "/order/description/{{order.order}}">{{order.order}}</a></td>
+                <td > {{order.profile}}</td>
+                <td >{{order.created}}</td>
+                <td >{{order.total_price}}</td>
+                <td >{{order.order.customer}}</td>
+                <td >{{order.}}</td>
+                <td >{{order.note}}</td>
+            </tr>
+          {% endfor %}
+        </div>
+        </div>
+      </div>
+<style>
+.status-1{
+    background:#ff11112e;
+}
+.status-2{
+    background:#fffb112e;
+}
+.status-3{
+    background:#1fff1a4f;
+}
+.good-image{
+height: 100px;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,43 @@
+/* navbar */
+.navbar{ background:#5A7DF8;}
+.nav-link , .navbar-brand{ color: #ffffff; cursor: pointer;}
+.nav-link{ margin-right: 1em !important;}
+.nav-link:hover{ background: #ffffff; color: #000000; }
+.navbar-collapse{ justify-content: flex-end;}
+.navbar-toggler{  background:#ffffff !important;}
+/* пагинация */
+.pagination-contract {display: flex;padding-left: 0;margin-top: 10px;list-style: none;border-radius: 0.25rem;}
+.page-link-contract {position: relative;display: block;padding: 0.5rem 0.75rem;margin-left: -1px;color: #5A7DF8;float: left;padding: 8px 16px;text-decoration: none;border: 1px solid #5A7DF8;border-top-right-radius: 5px;border-top-left-radius:5px;border-bottom-right-radius: 5px;border-bottom-left-radius:5px;}
+.page-link-contract:hover {z-index: 2;color: #5A7DF8;text-decoration: none;background-color: #e9ecef;border-color: #dee2e6;}
+.page-link-contract:focus {z-index: 3;outline: 0;box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);}
+.page-item-contract:first-child .page-link-contract {margin-left: 0;border-top-left-radius: 0.25rem;border-bottom-left-radius: 0.25rem;}
+.page-item-contract:last-child .page-link-contract {border-top-right-radius: 0.25rem;border-bottom-right-radius: 0.25rem;}
+.page-item-contract.active .page-link-contract {background-color: #5A7DF8;color: #fff;border: 1px solid #5A7DF8;}
+.margin-navbar{  margin-top:80px;}
+/* кнопка создать договор */
+.button-create-newcontract{  margin-left:-48px;  height:40px;  width:208px;  border:none;  text-decoration:none;  display: inline-block;  color:white;  padding: 5px 5px;  border-radius: 5px 5px 5px 5px;  font-family: 'Montserrat', sans-serif;  box-shadow: 0 0 20px rgba(0,0,0,.1);background-color: #5A7DF8;font-size: 16px}
+/* Форма поиска */
+.button-search{   position:relative;   top:0;   right:0px;   width:40px;   height:40px;   outline:none;   border:none;   background:#5A7DF8;   cursor:pointer;   border-radius: 0px 5px 5px 0px;}
+.button-search:before{	font-family:FontAwesome;	content:"\f002";	font-size:20px;	color:#F9F0DA}
+.search_form {  width: 800px;  height: 40px;  padding-left:10px;  margin-right:-40px;  border: 2px solid #5A7DF8;  background:#ffffff;  border-radius: 5px 5px 5px 5px; }
+/* Карточка */
+.col-card{  margin-top:20px;}
+.card-contract{padding-top:20px}
+.card-title{font-size:14pt;}
+.card-contract-body{}
+.h-form{  margin-left:20px;  }
+/* Формы контракты */
+.contract_number_form{   margin-left:4px;   margin-top:4px;   width:204px;   height:30px;   border: 2px solid #000000;   background:#ffffff;   border-radius: 3px 3px 3px 3px;}
+.order_form{   margin-left:26px;   margin-top:10px;   width:204px;   height:30px;   border: 2px solid #000000;   background:#ffffff;   border-radius: 3px 3px 3px 3px;}
+.provider_form{   margin-left:46px;   margin-top:10px;   width:204px;   height:30px;   border: 2px solid #000000;   background:#ffffff;   border-radius: 3px 3px 3px 3px;}
+.type_form{   margin-left:105px;   margin-top:4px;   width:204px;   height:30px;   border: 2px solid #000000;   background:#ffffff;   border-radius: 3px 3px 3px 3px;}
+.garanty_form{ margin-left:24px; margin-top:4px;  width:204px;   height:30px; border: 2px solid #000000;   background:#ffffff;   border-radius: 3px 3px 3px 3px;}
+.avance_form{margin-left:90px; margin-top:4px;  width:204px;   height:30px; border: 2px solid #000000;   background:#ffffff;   border-radius: 3px 3px 3px 3px;}
+.date_provider_form{   margin-left:22px;   margin-top:10px;   width:204px;   height:30px;   border: 2px solid #000000;   background:#ffffff;   border-radius: 3px 3px 3px 3px;}
+/* Карточка формы создания контракта */
+.card-form-contract{  padding-top:20px;  padding-bottom:20px;  margin-top:-20px;}
+.heading-contract-new{margin-left:50px; padding-top:10px;padding-bottom:20px;}
+.heading-contract{padding-top:10px;padding-bottom:20px; align:left;}
+/* Формы создания договора */
+.button-create{  margin-top: 50px;  margin-left:500px;  height:40px;  width:208px;  border:none;  text-decoration:none;  display: inline-block;  color:white;  padding: 5px 5px;  border-radius: 5px 5px 5px 5px;  font-family: 'Montserrat', sans-serif;  box-shadow: 0 0 20px rgba(0,0,0,.1);  background-color: #5A7DF8;  font-size: 16px}
+.button-open-word{ margin-top:110px; margin-left:-10px; border:none;  height:30px; width:208px; text-decoration:none;  display: inline-block;  color:white;  padding: 5px 5px;  border-radius: 5px 5px 5px 5px;  font-family: 'Montserrat', sans-serif;  box-shadow: 0 0 20px rgba(0,0,0,.1); background-color: #5A7DF8;font-size: 16px}

@@ -1,0 +1,94 @@
+{% extends "template.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      {% include "base/base.html"%}
+    </div>
+  </div>
+  <div class="row margin-navbar">
+    <div class="col">
+      <h4 class="heading-contract" align="center">Контракт №{{contract.contract_number}}</h4>
+        <div class="card card-contract">
+          <div class="row">
+            <div class="col-8 col-inf-8">
+                <h6>Поставщик:</h6>
+                <div class="contract-form">{{contract.provider.last_name}}&nbsp;{{contract.provider.first_name}}&nbsp;{{contract.provider.patronymic}}</div>
+                <h6>Клиент: </h6>
+                <div class="contract-form"> {{contract.customer.last_name}}&nbsp;{{contract.customer.first_name}}&nbsp;{{contract.customer.patronymic}}</div>
+                <div class="contract-form"> <h6>Организация: </h6> {{contract.provider.organization}} <h6> Директор: </h6> {{contract.provider.director}}</div>
+            </div>
+           <div class="col-4">
+             <div class="status_order">
+              <h6>Статус заказа:</h6>
+              <div class="contract-form">Заказ оплачен: {{contract.order.payment}}</div>
+             </div>
+           </div>
+         </div>
+          <div class="row">
+            <div class="col-12">
+              <h5 align="center">Товары в заказе: </h5>
+              <div class="card card-contract">
+                <div class="card-body card-contract-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <h5 class="card-title">Номер заказа</h5>
+                    </div>
+                    <div class="col-6">
+                      <h5 class="card-title">Дата заказа</h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                     <h6 class="card-text">{{contract.order.id}}</h6>
+                    </div>
+                    <div class="col-6">
+                     <h6 class="card-text">{{contract.order.created|date:"d/m/Y"}}</h6>
+                    </div>
+                  </div>
+                  {% for good in goods %}
+                  <div class="row">
+                   <div class="col-3">
+                     <h5 class="card-subtitle">&nbsp;</h5>
+                     <h5 class="card-title">Продукт</h5>
+                    </div>
+                   <div class="col-3">
+                     <h5 class="card-subtitle">&nbsp;</h5>
+                     <h5 class="card-title">Количество</h5>
+                    </div>
+                   <div class="col-3">
+                     <h5 class="card-subtitle">&nbsp;</h5>
+                     <h5 class="card-title">Цена</h5>
+                    </div>
+                   <div class="col-3">
+                     <h5 class="card-subtitle">&nbsp;</h5>
+                     <h5 class="card-title">Продукт будет готов: </h5>
+                    </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-3">
+                       <h6 href="/order/description/{{good.id}}">{{good.type_of_product}} {{good.profile}} {{good.fittings}}</h6>
+                      </div>
+                      <div class="col-3">
+                       <h6 class="card-text">{{good.number_of}}</h6>
+                      </div>
+                      <div class="col-3">
+                       <h6 class="card-text">{{good.total_price}}</h6>
+                      </div>
+                      <div class="col-3">
+                       <h6><a href="/good/graphs">{{good.completed}}</a></h6>
+                      </div>
+                  </div>
+                      {% endfor %}
+                 </div>
+               </div>
+             </div>
+          </div>
+        </div>
+     </div>
+  </div>
+</div>
+{% endblock %}

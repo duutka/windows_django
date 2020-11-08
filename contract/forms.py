@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from contract.models import Contract
+from contract.models import Contract, Transaction
 
 class SearchContractForm(forms.Form):
     information = forms.CharField(label="", widget=forms.TextInput(attrs={
@@ -24,3 +24,8 @@ class ContractForm(forms.ModelForm):
             'type': forms.Select(attrs={'class':'type_form'}),
             'date_provider': forms.DateTimeInput(attrs={'class':'date_provider_form', 'data-target':'#datetimepicker1'})
              }
+
+class TransactionForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = '__all__'

@@ -22,9 +22,15 @@
                 <div class="contract-form"> <h6>Организация: </h6> {{contract.provider.organization}} <h6> Директор: </h6> {{contract.provider.director}}</div>
             </div>
            <div class="col-4">
-             <div class="status_order">
-              <h6>Статус заказа:</h6>
-              <div class="contract-form">Заказ оплачен: {{contract.order.payment}}</div>
+              <form method="GET" action="./newtransaction">{% csrf_token %}
+                <h6>Статус заказа</h6>
+                <button type="submit" class="button-create-transaction">+</button>
+              </form>
+              <div class="transactions">
+              <h7>Транзакции:</h7>
+              {% for transaction in transactions %}
+              <div class="contract-form">{{transaction.date_transaction}}&nbsp;{{transaction.sum}}р&nbsp;{{transaction.comment}}</div>
+              {% endfor %}
              </div>
            </div>
          </div>

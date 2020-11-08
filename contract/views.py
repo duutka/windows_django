@@ -2,13 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, FormView, TemplateView
 from django.views.generic.edit import CreateView
-from contract.models import Contract, Provider
+from contract.models import Contract, Provider, Transaction
 from good.models import Good, Order
 from customer.models import Customer
 from docxtpl import DocxTemplate
 from django.contrib import messages
 from io import BytesIO
-from contract.forms import ContractForm, SearchContractForm
+from contract.forms import ContractForm, SearchContractForm, TransactionForm
 from customer.forms import CustomerForm
 from django.db.models import Q
 from datetime import datetime, timedelta
@@ -107,14 +107,36 @@ def excel(request):
 def contract(request, pk):
     template_name = 'contract/contract_information.html'
     contract = Contract.objects.get(id=pk)
+    transactions = Transaction.objects.filter(contract=contract.id)
     goods = Good.objects.filter(order=contract.order.id)
     context = {
         'contract':contract,
+        'transactions':transactions,
         'goods': goods,
     }
     return render(request, 'contract/contract_information.html', context)
 
 
+
+def contract_transaction_new(request, pk):
+    template_name = 'contract/transaction_form.html'
+    form = TransactionForm(self.request.GET)
+    context = {
+        'form': form
+    }
+    #
+    # def post(self, request, *args, **kwargs):
+    #     context = self.get_context_data(**kwargs)
+    #     if context['form'].is_valid():
+    #         instance = context['form'].save()
+    #         return self.render_to_response(request, 'contract/contract_information.html', context)
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super(contract_transaction_new, self).get_context_data(**kwargs)
+    #     context['form'] = TransactionForm(self.request.POST)
+    #     return context
+
+    return render(request, 'contract/transaction_form.html', context)
 
 def index(request):
     return render(request,'base/home.html')

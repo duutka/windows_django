@@ -22,7 +22,7 @@
                 <div class="contract-form"> <h6>Организация: </h6> {{contract.provider.organization}} <h6> Директор: </h6> {{contract.provider.director}}</div>
             </div>
            <div class="col-4">
-              <form method="GET" action="./newtransaction">{% csrf_token %}
+              <form method="GET" action="/contract/newtransaction/{{contract.id}}/">{% csrf_token %}
                 <h6>Статус заказа</h6>
                 <button type="submit" class="button-create-transaction">+</button>
               </form>

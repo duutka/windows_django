@@ -65,7 +65,7 @@ def docx(request,pk):
     contract = Contract.objects.get(id=pk)
     steam = BytesIO()
     doc = DocxTemplate("Contract/media/word//template_new.docx")
-    contract.total_price = contract.get_total_price()
+    # contract.total_price = contract.get_total_price()
     context = {
                 'contract':contract
               }
@@ -120,10 +120,15 @@ def contract(request, pk):
 
 def contract_transaction_new(request, pk):
     template_name = 'contract/transaction_form.html'
-    form = TransactionForm(self.request.GET)
-    context = {
-        'form': form
-    }
+
+    if request.method == 'POST':
+            form = TransactionForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/contract/'+ pk +'/')
+    else:
+            form = TransactionForm()
+    return render(request, 'contract/transaction_form.html', {'form':form})
     #
     # def post(self, request, *args, **kwargs):
     #     context = self.get_context_data(**kwargs)
@@ -136,7 +141,7 @@ def contract_transaction_new(request, pk):
     #     context['form'] = TransactionForm(self.request.POST)
     #     return context
 
-    return render(request, 'contract/transaction_form.html', context)
+
 
 def index(request):
     return render(request,'base/home.html')

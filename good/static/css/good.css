@@ -34,6 +34,22 @@
   background-color: #5A7DF8;
   font-size: 16px
 }
+.button-create-newcard
+{
+margin-left: -724px;
+height:40px;
+width:208px;
+border:none;
+text-decoration:none;
+display: inline-block;
+color:white;
+padding: 5px 5px;
+border-radius: 5px 5px 5px 5px;
+font-family: 'Montserrat', sans-serif;
+box-shadow: 0 0 20px rgba(0,0,0,.1);
+background-color: #5A7DF8;
+font-size: 16px
+}
 
 /* Форма поиска */
 .button-search{

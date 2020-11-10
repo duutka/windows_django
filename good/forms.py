@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import widgets
 from good.models import Good, Order
+from contract.models import Montage
 from customer.models import Customer
 from django.forms import ModelForm
 
@@ -125,6 +126,28 @@ class GoodForm(forms.ModelForm):
             'status': forms.Select(attrs={'class':'form-control','placeholder':'Статус'}),
          }
 
+class MontageForm(forms.ModelForm):
+    class Meta:
+        model = Montage
+        fields = [
+        'date',
+        'address',
+        'customer',
+        'description']
+
+        labels = {
+            'date': 'Дата',
+            'address': 'Адрес',
+            'customer': 'Клиент',
+            'description': 'Описание',
+            }
+
+        widgets = {
+            'date': forms.TextInput(attrs={'class':'form-control','placeholder':'Дата'}),
+            'address': forms.TextInput(attrs={'class':'form-control','placeholder':'Адрес'}),
+            'customer': forms.Select(attrs={'class':'form-control','placeholder':'Клиент'}),
+            'description': forms.TextInput(attrs={'class':'form-control','placeholder':'Описание'}),
+    }
 # class OrderForm(ModelForm):
 #     class Meta:
 #         model=Good

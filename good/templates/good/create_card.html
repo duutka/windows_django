@@ -1,0 +1,28 @@
+{% extends "good/wrapper.html" %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+  <div class="col">
+{% include "base/base.html"%}
+  </div>
+</div>
+<div class="row margin-navbar">
+</div>
+<div class="row">
+ <div class="features">
+   <div class="col-2">
+     <div class="form-body">
+       <form method="POST", action="">
+         {% csrf_token %}
+         {{form_montage.date}}
+         {{form_montage.address}}
+         {{form_montage.customer}}
+         {{form_montage.description}}
+         <button class="btn btn-success" type="submit">Создать карточку</button>
+       </form>
+     </div>
+   </div>
+ </div>
+</div>
+{% endblock %}

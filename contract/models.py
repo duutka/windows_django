@@ -141,6 +141,8 @@ class Contract(models.Model):
                                    auto_now=True,
                                    verbose_name="Обновлено"
                                    )
+
+
     # def get_total_price(self):
     #     return self.order.good_set.all().aggregate(Sum('total_price'))['total_price__sum']
 
@@ -170,3 +172,27 @@ class Contract(models.Model):
             return self.total_price
         else:
             return self.total_price - Transaction.objects.filter(contract=self.id).aggregate(Sum('sum'))['sum__sum']
+
+class Montage(models.Model):
+    date=models.DateTimeField(blank=True,
+                              null=True,
+                              verbose_name="Дата"
+                              )
+    address = models.CharField(max_length=128,
+                               verbose_name="Адрес"
+                               )
+    customer = models.ForeignKey(Customer,
+                                 on_delete=models.CASCADE,
+                                 blank=True,
+                                 null=True,
+                                 verbose_name="Клиент"
+                                 )
+    description = models.CharField(max_length=1000,
+                                   verbose_name="Описание"
+                                   )
+    class Meta:
+        verbose_name = "Монтаж"
+        verbose_name_plural = "Монтажы"
+
+    def __str__(self):
+        return '%s %s %s' % (self.date,self.customer, self.address)

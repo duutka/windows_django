@@ -1,4 +1,4 @@
-{% extends "template.html" %}
+{% extends "good/wrapper.html" %}
 {% block title %}Графики{% endblock %}
 
 {% block content %}
@@ -6,31 +6,30 @@
     {% include "base/base.html"%}
 </header>
 <div class="container">
-    <div class="row margin-navbar">
-        {% for day in day_list %}
-        <div class="col-3">
-            число: {{day.date}}
-            {% for good in day.goods %}
-            <div class="row sheduler__hour-row">
-                    <div class="col-2">
-                      {{good.date}}
-                    </div>
-                    <div class="col-10">
-                      {% for x in good.data %}
-                      <!-- {%if good.date|add:x.time_of_production > endday %}
-                      <div class="sheduler__clear sheduler__good  sheduler__good-height-{{endday|add:"-good.date"}}">{{x.id}} {{x.order.customer.last_name}}</div>
-                      {% else %} -->
-                      <div class="sheduler__good  sheduler__good-height-{{x.time_of_production}}">{{x.id}} {{x.order.customer.last_name}}</div>
-                      <!-- {% endif %} -->
-                    {% endfor %}
-                    </div>
-            </div>
-                {% endfor %}
-        </div>
-    {% endfor %}
-    </div>
-</div>
+  <div class="row margin-navbar">
+  </div>
+    <form method="get" action="./newcard">
+      <button type="submit" class="button-create-newcard">Создать карточку</button>
+    </form>
+  <div class="row">
+  {% for montage in object_list %}
+  <div class="col-3">
+   <div class="card" style="width: 18rem;">
+   <div class="card-body">
+     <h5 class="card-title">{{montage.date}}</h5>
+   </div>
+   <ul class="list-group list-group-flush">
+     <li class="list-group-item">{{montage.address}}</li>
+     <li class="list-group-item">{{montage.customer}}</li>
+     <li class="list-group-item">{{montage.description}}</li>
+   </ul>
+ </div>
+ </div>
+ {% endfor %}
+  </div>
+ </div>
 <style>
+
 .sheduler__clear{
   border-bottom: none;
 }

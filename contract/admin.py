@@ -24,3 +24,9 @@ class TransactionAdmin(admin.ModelAdmin):
     class Meta:
         model = Transaction
 admin.site.register(Transaction, TransactionAdmin)
+
+class MontageAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Montage._meta.fields]
+    class Meta:
+        model = Montage
+admin.site.register(Montage, MontageAdmin)

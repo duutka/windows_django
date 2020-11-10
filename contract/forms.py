@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from contract.models import Contract, Transaction
+from contract.models import Contract, Transaction, Montage
 
 class SearchContractForm(forms.Form):
     information = forms.CharField(label="", widget=forms.TextInput(attrs={
@@ -29,3 +29,26 @@ class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
         fields = '__all__'
+
+# class MontageForm(forms.ModelForm):
+#     class Meta:
+#         model=Montage
+#         fields=[
+#         'date',
+#         'address',
+#         'customer',
+#         'description']
+#
+#         labels={
+#             'date': 'Дата',
+#             'address': 'Адрес',
+#             'customer': 'Клиент',
+#             'description': 'Описание',
+#             }
+#
+#     widgets = {
+#     'date': forms.TextInput(attrs={'class':'form-control','placeholder':'Дата'}),
+#     'address': forms.TextInput(attrs={'class':'form-control','placeholder':'Адрес'}),
+#     'customer': forms.Select(attrs={'class':'form-control','placeholder':'Клиент'}),
+#     'description': forms.TextInput(attrs={'class':'form-control','placeholder':'Описание'}),
+#     }

@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from good.models import Good, Order
-from django.views.generic import ListView, DetailView, FormView, TemplateView
+from contract.models import Montage
+from django.views.generic import ListView, DetailView, FormView, TemplateView, CreateView
 from good.forms import SearchOrderForm
 from django.db.models import Q
-from good.forms import CustomerForm, OrderForm, GoodForm
+from good.forms import CustomerForm, OrderForm, GoodForm, MontageForm
 from datetime import datetime, timedelta
 from .models import *
 
@@ -93,3 +95,24 @@ class GraphList(ListView):
         context['hour'] = range(8)
         context['day_list'] = day_list
         return context
+
+class Graph_Montage(ListView):
+     model=Montage
+     template_name='good/graph_list.html'
+     queryset = Montage.objects.all().order_by("date")
+
+class CardCreate(TemplateView):
+    template_name = 'good/create_card.html'
+    success_url = '/graphs/'
+
+    def get_context_data(self, **kwargs):
+        context = super(CardCreate, self).get_context_data(**kwargs)
+        context['form_montage'] = MontageForm(self.request.POST)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        if context['form_montage'].is_valid():
+            instance_montage = context['form_montage'].save()
+            return HttpResponseRedirect("/good/graphs")
+        return self.render_to_response(context)
